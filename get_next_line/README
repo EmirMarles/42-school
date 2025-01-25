@@ -1,0 +1,2 @@
+A C programming project focused on creating a function that reads and returns a single line from a file descriptor. 
+This function supports both standard input (stdin) and regular files.
