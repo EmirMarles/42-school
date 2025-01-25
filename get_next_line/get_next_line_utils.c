@@ -6,7 +6,7 @@
 /*   By: emarles <emarles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:21:52 by emarles           #+#    #+#             */
-/*   Updated: 2025/01/12 15:14:54 by emarles          ###   ########.fr       */
+/*   Updated: 2025/01/19 15:25:00 by emarles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,9 @@ char	*ft_strjoin(char *s1, char *s2)
 	size_t	i;
 	size_t	k;
 	char	*new_str;
-	
+
 	i = 0;
 	k = 0;
-	// free(new_str);
 	new_str = malloc(((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char)));
 	if (new_str == NULL)
 		return (NULL);
@@ -71,12 +70,11 @@ size_t	ft_strlen(char *s)
 	return (size);
 }
 
-char	*ft_strchr(char *str, int search_str, int pos)
+char	*ft_strchr(char *str, int search_str)
 {
-	int		i;
+	int	i;
 
 	i = 0;
-	i = pos;
 	while (str[i] != '\0')
 	{
 		if (str[i] == (char)search_str)
@@ -86,4 +84,31 @@ char	*ft_strchr(char *str, int search_str, int pos)
 	if (search_str == '\0')
 		return ((char *)&str[i]);
 	return (NULL);
+}
+
+char	*storage_update(char *storage)
+{
+	char	*updated_storage;
+	int		i;
+	int		k;
+
+	i = 0;
+	while (storage[i] != '\0' && storage[i] != '\n')
+		i++;
+	if (storage[i] == '\n')
+		i++;
+	if (storage[i] == '\0')
+	{
+		free(storage);
+		return (NULL);
+	}
+	updated_storage = malloc((ft_strlen(storage) - i + 1) * sizeof(char));
+	if (!updated_storage)
+		return (NULL);
+	k = 0;
+	while (storage[i] != '\0')
+		updated_storage[k++] = storage[i++];
+	updated_storage[k] = '\0';
+	free(storage);
+	return (updated_storage);
 }
